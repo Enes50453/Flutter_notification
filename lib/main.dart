@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_notification/notificationHelper/notificationHelper.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    NotificationHelper.initialize(flutterLocalNotificationsPlugin);
   }
 
   @override
@@ -53,7 +55,14 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white, borderRadius: BorderRadius.circular(20)),
             width: 200,
             height: 80,
-            child: ElevatedButton(onPressed: () {}, child: Text("click!")),
+            child: ElevatedButton(
+                onPressed: () {
+                  NotificationHelper.showBigTextNotification(
+                      title: "MESSAGE TİTLE",
+                      body: "your long message",
+                      fln: flutterLocalNotificationsPlugin);
+                },
+                child: Text("click!")),
           ),
         ),
       ),
